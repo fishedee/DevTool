@@ -12,23 +12,8 @@ export default {
     //ProLayout使用前缀匹配的原则来匹配哪个菜单
     routes: [
         {
-            path: '/user',
-            name: '用户管理',
-            icon: <SmileOutlined />, //定义图标
-        },
-        {
-            path: '/card',
-            name: '银行卡管理',
-            icon: <SmileOutlined />, //定义图标
-        },
-        {
-            path: '/category',
-            name: '分类管理',
-            icon: <SmileOutlined />, //定义图标
-        },
-        {
-            path: '/account',
-            name: '账务管理',
+            path: '/iots',
+            name: 'iots转换',
             icon: <SmileOutlined />, //定义图标
         },
     ],
