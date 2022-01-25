@@ -133,26 +133,29 @@ class TypeTreeBuilder{
         this.instance = instance;
     }
 
+    private addNode(){
+        this.dumpRootTree.addNode(this.dumpRootPath.getNext()!);
+    }
     private traverse(instance:any,propertyName:string,currentPath:TypePath){
         let childPath:TypePath;
         if( typeof instance == 'string' ){
             childPath = new TypePath('string',propertyName,currentPath.getPath()+"."+propertyName);
             currentPath.setNext(childPath);
-            this.dumpRootTree.addNode(childPath);
+            this.addNode();
         }else if( typeof instance == 'number'){
             childPath = new TypePath('number',propertyName,currentPath.getPath()+"."+propertyName);
             currentPath.setNext(childPath);
-            this.dumpRootTree.addNode(childPath);
+            this.addNode();
         }else if( instance == null || instance == undefined){
             childPath = new TypePath('null',propertyName,currentPath.getPath()+"."+propertyName);
             currentPath.setNext(childPath);
-            this.dumpRootTree.addNode(childPath);
+            this.addNode();
         }else if( typeof instance == 'object' ){
             if( instance instanceof Array){
                 //Array类型
                 childPath = new TypePath('Array',propertyName,currentPath.getPath()+"."+propertyName);
                 currentPath.setNext(childPath);
-                this.dumpRootTree.addNode(childPath);
+                this.addNode();
 
                 //添加数组的每个元素
                 for( let i in instance ){
@@ -163,7 +166,7 @@ class TypeTreeBuilder{
                 //Object类型
                 childPath = new TypePath('Object',propertyName,currentPath.getPath()+"."+propertyName);
                 currentPath.setNext(childPath);
-                this.dumpRootTree.addNode(childPath);
+                this.addNode();
 
                 //添加Object的每个元素
                 for( let i in instance ){
@@ -185,7 +188,7 @@ class TypeTreeBuilder{
 class TypeNameAssigner{
     private typeTree:TypeTree;
 
-    private typeNamePond:number = 0;
+    private typeNamePond:number = -1;
 
     public constructor(typeTree:TypeTree){
         this.typeTree = typeTree;
@@ -193,10 +196,10 @@ class TypeNameAssigner{
 
     private getTypeName():string{
         this.typeNamePond++;
-        if( this.typeNamePond == 1 ){
+        if( this.typeNamePond == 0 ){
             return "RootType";
         }else{
-            return `ObjectType_${this.typeNamePond}`;
+            return `SubType_${this.typeNamePond}`;
         }
     }
     
@@ -217,4 +220,13 @@ class TypeNameAssigner{
     public assign(){
         this.assignTree(this.typeTree);
     }
+}
+
+export default TypeTree;
+
+export {
+    TypeTreeBuilder,
+    TypePath,
+    TypeName,
+    TypeNameAssigner,
 }

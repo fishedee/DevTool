@@ -1,0 +1,97 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Object的key为undefined 1`] = `
+"val SubType_1 = t.type({
+id:t.number,
+countryName:t.union([t.string,t.undefined]),
+});
+val RootType = t.type({
+name:t.string,
+age:t.number,
+data:t.array(t.union([t.number,t.string,SubType_1])),
+});
+"
+`;
+
+exports[`Object的key为多集合元素 1`] = `
+"val SubType_1 = t.type({
+id:t.number,
+countryName:t.union([t.number,t.string]),
+});
+val RootType = t.type({
+name:t.string,
+age:t.number,
+data:t.array(SubType_1),
+});
+"
+`;
+
+exports[`基础测试 1`] = `
+"val RootType = t.type({
+name:t.string,
+age:t.number,
+bb:t.null,
+});
+"
+`;
+
+exports[`嵌套Array 1`] = `
+"val SubType_1 = t.type({
+code:t.number,
+msg:t.array(t.string),
+});
+val RootType = t.type({
+name:t.string,
+age:t.number,
+data:SubType_1,
+});
+"
+`;
+
+exports[`嵌套Object的Array 1`] = `
+"val SubType_1 = t.type({
+id:t.number,
+countryName:t.string,
+});
+val RootType = t.type({
+name:t.string,
+age:t.number,
+data:t.array(SubType_1),
+});
+"
+`;
+
+exports[`嵌套object 1`] = `
+"val SubType_1 = t.type({
+code:t.number,
+msg:t.string,
+});
+val RootType = t.type({
+name:t.string,
+age:t.number,
+data:SubType_1,
+});
+"
+`;
+
+exports[`嵌套了多种类型的Array 1`] = `
+"val SubType_1 = t.type({
+id:t.number,
+countryName:t.string,
+});
+val RootType = t.type({
+name:t.string,
+age:t.number,
+data:t.array(t.union([t.number,t.string,SubType_1])),
+});
+"
+`;
+
+exports[`空元素的Array 1`] = `
+"val RootType = t.type({
+name:t.string,
+age:t.number,
+data:t.array(t.unknown),
+});
+"
+`;

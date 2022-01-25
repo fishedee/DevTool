@@ -1,3 +1,5 @@
+import TypeTree  from "./TypeTree";
+
 class IoTsGenerator{
     private typeTree:TypeTree;
 
@@ -11,17 +13,19 @@ class IoTsGenerator{
         const typeUnion:string[] = [];
         if( node.isNull ){
             typeUnion.push("t.null");
-        }else if( node.isNumber ){
+        }
+        if( node.isNumber ){
             typeUnion.push("t.number");
-        }else if( node.isString){
+        }
+        if( node.isString){
             typeUnion.push("t.string");
-        }else if( node.isObject ){
+        }
+        if( node.isObject ){
             //递归生成子类型
-            node.objectNameMap.forEach((childObject)=>{
-                this.generateTree(childObject);
-            });
+            this.generateTree(node);
             typeUnion.push(node.objectName);
-        }else if( node.isArray ){
+        }
+        if( node.isArray ){
             if(node.arrayItemType){
                 const subArrayType = this.getTypeDeclartion(node.arrayItemType);
                 if( subArrayType.length == 1 ){
@@ -56,12 +60,13 @@ class IoTsGenerator{
             }
 
             if( typeUnion.length == 1 ){
-                current += `${propertyName}:${typeUnion[0]}\n`
+                current += `${propertyName}:${typeUnion[0]},\n`
             }else{
-                current += `${propertyName}:t.union([${typeUnion.join(',')}])\n`
+                current += `${propertyName}:t.union([${typeUnion.join(',')}]),\n`
             }
         });
         current += "});\n";
+        this.result += current;
     }
 
     public generate():string{
@@ -69,3 +74,5 @@ class IoTsGenerator{
         return this.result;
     }
 }
+
+export default IoTsGenerator;
