@@ -5,11 +5,12 @@ import {Input,Button} from 'antd';
 import { useRef } from 'react';
 import MonacoEditor from 'react-monaco-editor';
 import GlobalCatch from '@/util/GlobalCatch';
-import { indexOf } from 'underscore';
+import { filter, indexOf } from 'underscore';
 import {Modal} from 'antd';
 import moment from 'moment';
 var beautify = require('js-beautify').js;
 import {history} from 'umi';
+import { DateTimeComparator } from './AgGridUtil';
 
 class PageModel{
     public data:{
@@ -103,7 +104,16 @@ class PageModel{
             }else{
                 throw new Error("列描述中的converter不正确["+converter+"]");
             }
-            single.converter = undefined;
+            delete single[converter];
+            if( single.filter == 'agDateColumnFilter'){
+                let filterParams = single.filterParams;
+                if( !filterParams){
+                    filterParams = {};
+                    single.filterParams = filterParams;
+                }
+                filterParams.comparator = DateTimeComparator;
+                filterParams.inRangeInclusive = true;
+            }
             return single;
         })
     }
@@ -159,6 +169,7 @@ class PageModel{
                     field: i,
                     filter: 'agNumberColumnFilter',
                     aggFunc: 'sum',
+                    enableRowGroup:true,
                 });
             }
         }
@@ -314,7 +325,6 @@ const Default:React.FC<any> = (props)=>{
                             pathname:'/analyse/list',
                             state:nextData,
                         });
-                        console.log('nextData',nextData);
                     });
                 }}>第3步：数据分析</Button>
             </div>

@@ -10,7 +10,7 @@ import { GridApi, ColumnApi } from 'ag-grid-community';
 const Page: React.FC<any> = (props) => {
     const location = useLocation() as any;
     const state = location.state ? location.state : {};
-
+    console.log('state',state);
     const defaultColDef = useMemo(() => {
         return {
             flex: 1,
