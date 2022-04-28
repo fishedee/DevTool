@@ -65,6 +65,9 @@ class PageModel{
         if( typeof columnDesc != 'object' && columnDesc instanceof Array == false ){
             throw new Error("列描述不是有效的数组");
         }
+        list.forEach(single2=>{
+            single2.__count = 1;
+        })
         return columnDesc.map((single:any)=>{
             let field = single.field;
             if( !field ){
@@ -122,7 +125,15 @@ class PageModel{
         if( typeof target != 'object' && target instanceof Array == false ){
             throw new Error("数组元素必须为对象类型");
         }
-        let columnDesc = [];
+        let columnDesc = [
+        ];
+        columnDesc.push(
+            {   
+                headerName:'数量',
+                field: '__count',
+                filter: 'agNumberColumnFilter',
+                aggFunc: 'sum',
+            });
         for( let i in target ){
             let single = target[i];
             if( typeof single == 'string' && i.toLowerCase().indexOf('time') != -1 ){

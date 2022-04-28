@@ -48,7 +48,7 @@ public class CrawlController {
         @NotNull
         private Map<String,String> header = new HashMap<>();
     }
-    
+
     @GetMapping("/get")
     public String get(DTO dto){
         HttpHeaders httpHeaders = new HttpHeaders();

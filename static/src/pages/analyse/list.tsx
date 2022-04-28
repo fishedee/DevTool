@@ -41,7 +41,7 @@ const Page: React.FC<any> = (props) => {
 
     const onGridReady = useCallback(() => {
     }, []);
-    const [disabled, setDisabled] = useState(false);
+    const [disabled, setDisabled] = useState(true);
     const ref = useRef<{ api: GridApi, columnApi: ColumnApi }>();
     return (
         <div
