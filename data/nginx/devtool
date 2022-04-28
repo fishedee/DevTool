@@ -1,5 +1,5 @@
 upstream devtool {
-	server localhost:7878;
+	server localhost:9192;
 	keepalive 8;
 }
 
@@ -16,7 +16,7 @@ server {
     ssl_protocols TLSv1 TLSv1.1 TLSv1.2;
     ssl_prefer_server_ciphers on;
 
-	server_name saleserp.balefcloud.com;
+	server_name devtool.fishedee.com;
 
 	location / {
 		proxy_http_version 1.1;

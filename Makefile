@@ -1,6 +1,6 @@
 DIRECTORY=/home/fish/Project
 TARGET=devtool
-HOST=fish@idc.fishedee.com.com
+HOST=fish@idc.fishedee.com
 .PHONY:deploy zip build
 deploy:build zip upload remote_stop remote_combine remote_start clean
 	echo "deploy success"
