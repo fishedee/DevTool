@@ -16,5 +16,10 @@ export default {
             name: 'iots转换',
             icon: <SmileOutlined />, //定义图标
         },
+        {
+            path: '/analyse',
+            name: '在线数据分析',
+            icon: <SmileOutlined />, //定义图标
+        },
     ],
 };

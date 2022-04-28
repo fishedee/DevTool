@@ -40,6 +40,26 @@ const Default:React.FC<any> = (props)=>{
             alert(e);
         }
     }
+    const urlEncode = ()=>{
+        const model = editorRef.current!.getModel();
+        const value = model!.getValue();
+        try {
+            const newValue = encodeURIComponent(value);
+            editorRef2.current!.setValue(newValue);
+        } catch (e) {
+            alert(e);
+        }
+    }
+    const urlDecode = ()=>{
+        const model = editorRef.current!.getModel();
+        const value = model!.getValue();
+        try {
+            const newValue = decodeURIComponent(value);
+            editorRef2.current!.setValue(newValue);
+        } catch (e) {
+            alert(e);
+        }
+    }
     const ioTsEncode = ()=>{
         const model = editorRef.current!.getModel();
         const value = model!.getValue();
@@ -101,7 +121,12 @@ const Default:React.FC<any> = (props)=>{
                 <Button onClick={jsonEncode}>
                     {'JSON格式化 >'}
                 </Button>
-                <></>
+                <Button onClick={urlEncode}>
+                    {'URL编码 >'}
+                </Button>
+                <Button onClick={urlDecode}>
+                    {'URL解码 >'}
+                </Button>
             </div>
             <div
                 style={{
