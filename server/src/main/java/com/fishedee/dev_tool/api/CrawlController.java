@@ -53,7 +53,7 @@ public class CrawlController {
     public String get(DTO dto){
         HttpHeaders httpHeaders = new HttpHeaders();
         dto.header.forEach((key,value)->{
-            httpHeaders.add(key,value);
+            httpHeaders.set(key,value);
         });
         HttpEntity<?> entity = new HttpEntity<>(httpHeaders);
         ResponseEntity<String> result = restTemplate.exchange(dto.getUrl(), HttpMethod.GET,entity,String.class);
